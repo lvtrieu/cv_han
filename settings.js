@@ -98,7 +98,6 @@ const defaultJson = `{
     "Kỹ năng làm việc nhóm tốt",
     "Đặt mục tiêu, tổ chức và lập kế hoạch đạt hiệu quả trong công việc",
     "Sắp xếp thời gian làm việc hiệu quả",
-    "Kỹ năng đàm phán"
   ]
 }`;
 
