@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV - Huỳnh Thị Kim Hân</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <main class="page">
+      <div class="cv">
+        <!-- SETTINGS BUTTON -->
+        <!-- <a class="settings-btn" href="settings.html" aria-label="Cấu hình CV">
+          ⚙️
+        </a>
+         
+        <button class="pdf-btn no-print" type="button" onclick="printPDF()">
+          ⬇️
+        </button>
+         
+        <button
+          class="pdf-download-btn no-print"
+          type="button"
+          onclick="downloadPDF()"
+        >
+          PDF
+        </button> -->
+        <!-- HEADER -->
+        <header class="header">
+          <div class="avatar-wrap">
+            <img
+              id="avatarImg"
+              class="avatar"
+              src="avatar.jpg"
+              alt="Ảnh đại diện"
+            />
+          </div>
+
+          <div class="header-info">
+            <h1 id="cvName" class="name">Huỳnh Thị Kim Hân</h1>
+            <p id="cvHeadline" class="headline">
+              Ứng tuyển vị trí nhân viên Telesale, Nhân viên văn phòng
+            </p>
+            <ul id="cvMeta" class="meta"></ul>
+            <!-- <ul class="meta">
+              <li><b>Ngày sinh:</b> 13/06/1998</li>
+              <li><b>Giới tính:</b> Nữ</li>
+              <li><b>Số điện thoại:</b> 0702925779</li>
+              <li><b>Email:</b> huynhhan504@gmail.com</li>
+              <li><b>Địa chỉ:</b> Cần Thơ</li>
+            </ul> -->
+          </div>
+        </header>
+
+        <!-- HỌC VẤN -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">HỌC VẤN</h2>
+            <div class="section-line"></div>
+          </div>
+          <div id="eduRows" class="rows"></div>
+
+          <!-- <div class="rows">
+            <div class="row">
+              <div class="time">2016 &nbsp;–&nbsp; 2021</div>
+              <div class="content">
+                <div class="content-title">Trường Đại Học Nam Cần Thơ</div>
+                <div class="content-sub">Ngành Dược Học</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="time">2023 &nbsp;–&nbsp; 2025</div>
+              <div class="content">
+                <div class="content-title">Trường Đại Học Cửu Long</div>
+                <div class="content-sub">Ngôn Ngữ Anh - Văn bằng 2</div>
+              </div>
+            </div>
+          </div> -->
+        </section>
+
+        <!-- KINH NGHIỆM -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">KINH NGHIỆM LÀM VIỆC</h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div id="expRows" class="rows"></div>
+          <!-- <div class="rows">
+            <div class="row">
+              <div class="time">09/2021 &nbsp;–&nbsp; 01/2022</div>
+              <div class="content">
+                <div class="content-title">Công Ty Luật TNHH MTV Đại Long</div>
+                <div class="content-role">Nhân viên Telesale</div>
+                <ul class="bullets">
+                  <li>
+                    Liên hệ xác minh thông tin và hỗ trợ khách hàng từ danh sách
+                    do công ty cung cấp
+                  </li>
+                  <li>
+                    Tiếp nhận điện thoại và giải đáp thắc mắc cho khách hàng
+                  </li>
+                  <li>
+                    Hỗ trợ hòa giải, tư vấn khách hàng thực hiện đúng nghĩa vụ
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="time">01/2022 &nbsp;–&nbsp; 12/2024</div>
+              <div class="content">
+                <div class="content-title">Công TY TNHH SX TM DV Nhật Huy</div>
+                <div class="content-role">Nhân viên văn phòng</div>
+                <ul class="bullets">
+                  <li>
+                    Nhận viên kho: nhập phiếu xuất, phiếu nhập hàng hóa, kiểm
+                    tra xuất nhập hàng hóa
+                  </li>
+                  <li>
+                    Nhận viên hành chính: soạn thảo văn bản, công văn, soạn thảo
+                    hợp đồng (dựa trên mẫu có sẵn của công ty và theo ý kiến của
+                    ban lãnh đạo)
+                  </li>
+                  <li>
+                    Tra cứu, kiểm tra giá cũ, lưu hành sản phẩm trên thị trường
+                    từ số đăng ký thuốc hoặc xác minh thông tin thuốc dựa trên
+                    số đăng ký do Cục Quản lý Dược (Bộ Y tế) cấp
+                  </li>
+                  <li>
+                    Theo dõi, kiểm tra thông tin hàng hóa theo các gói thầu của
+                    các Bệnh viện theo từng đợt thầu
+                  </li>
+                  <li>
+                    Theo dõi thông tin mời thầu trên Hệ thống mạng đấu thầu quốc
+                    gia, Sở Y tế, bệnh viện...
+                  </li>
+                  <li class="no-dot">
+                    <b>Chuẩn bị hồ sơ dự thầu:</b>
+                    <ul class="sub-bullets">
+                      <li>
+                        Nghiên cứu yêu cầu kỹ thuật, pháp lý của hồ sơ mời thầu.
+                      </li>
+                      <li>
+                        Soạn thảo, sắp xếp, sao y phân loại và đóng quyển hồ sơ
+                        (hồ sơ năng lực, hồ sơ kỹ thuật, báo giá...).
+                      </li>
+                      <li>
+                        Phối hợp với bộ phận liên quan để hoàn thiện tài liệu,
+                        đảm bảo chính xác và đầy đủ.
+                      </li>
+                      <li>
+                        Cập nhật kết quả trúng thầu của các đơn vị có kết quả và
+                        gửi mail cho các bộ phận có liên quan.
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="time">01/2025 &nbsp;–&nbsp; 07/2025</div>
+              <div class="content">
+                <div class="content-title">
+                  Công ty CP Hải Dược Phẩm Nguyên Gia
+                </div>
+                <div class="content-role">
+                  Nhân Viên Kinh Doanh - Trình dược viên kênh ETC
+                </div>
+                <ul class="bullets">
+                  <li>Thực hiện chào thầu</li>
+                  <li>
+                    Tiếp cận, giới thiệu các loại thuốc mới, thuốc kê đơn (ETC)
+                    cho bác sĩ, dược sĩ trong bệnh viện
+                  </li>
+                  <li>
+                    Thường xuyên thăm hỏi, giải đáp thắc mắc về tác dụng, thành
+                    phần, liều dùng và tác dụng phụ của thuốc cho bác sĩ
+                  </li>
+                  <li>Nhắc thuốc, xin số lượng từ bác sĩ</li>
+                  <li>Theo dõi tình hình đấu thầu thuốc</li>
+                  <li>
+                    Xin số lượng dự trù thuốc của các khoa để đảm bảo cung ứng
+                    đầy đủ
+                  </li>
+                  <li>
+                    Duy trì các mối quan hệ cũ, phát triển và mở rộng các mối
+                    quan hệ mới
+                  </li>
+                  <li>
+                    Lập kế hoạch, triển khai các hoạt động bán hàng để đạt chỉ
+                    tiêu (KPIs) được giao
+                  </li>
+                  <li>
+                    Lập báo cáo công việc định kỳ, theo dõi thông tin đối thủ
+                    cạnh tranh, và khảo sát tình hình tiêu thụ thuốc tại bệnh
+                    viện.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="time">07/2025 &nbsp;–&nbsp; 02/2026</div>
+              <div class="content">
+                <div class="content-title">
+                  Công Ty Cổ Phần Dược Phẩm Nguyên Gia
+                </div>
+                <div class="content-role">Nhân viên nhà thuốc Bệnh Viện</div>
+                <ul class="bullets">
+                  <li>
+                    Nhập thông tin từ hóa đơn, phiếu bán hàng của các công ty
+                  </li>
+                  <li>Kiểm tra, sắp xếp thuốc</li>
+                  <li>Nhận đơn thuốc, thanh toán, phát thuốc</li>
+                  <li>Nhập hóa đơn thuốc lên hệ thống</li>
+                  <li>
+                    Gửi thông tin mới, cập nhật thông tin ưu đãi đến các bác sĩ,
+                    phòng ban có liên quan
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div> -->
+        </section>
+
+        <!-- CHỨNG CHỈ -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">CHỨNG CHỈ</h2>
+            <div class="section-line"></div>
+          </div>
+          <div id="certList" class="plain-list"></div>
+          <!-- <div class="plain-list">
+            <div class="plain-item">• Kỹ năng mềm</div>
+            <div class="plain-item">• Ứng dụng công nghệ thông tin cơ bản</div>
+            <div class="plain-item">• Chứng chỉ trình độ tiếng Anh A2</div>
+          </div> -->
+        </section>
+
+        <!-- KỸ NĂNG -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">KỸ NĂNG</h2>
+            <div class="section-line"></div>
+          </div>
+          <div id="skillList" class="plain-list"></div>
+          <!-- <div class="plain-list">
+            <div class="plain-item">• Kỹ năng làm việc nhóm tốt</div>
+            <div class="plain-item">
+              • Đặt mục tiêu, tổ chức và lập kế hoạch đạt hiệu quả trong công
+              việc
+            </div>
+            <div class="plain-item">• Sắp xếp thời gian làm việc hiệu quả</div>
+            <div class="plain-item">• Kỹ năng đàm phán</div>
+          </div> -->
+        </section>
+      </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script src="app.js"></script>
+    <script>
+      function printPDF() {
+        // đảm bảo font/ảnh kịp render
+        setTimeout(() => window.print(), 50);
+      }
+    </script>
+
+    <script>
+      async function downloadPDF() {
+        try {
+          // debug: xem có chạy không
+          console.log("downloadPDF clicked");
+
+          // check html2pdf đã sẵn sàng chưa
+          if (typeof html2pdf === "undefined") {
+            alert(
+              "Thư viện html2pdf chưa load được. Bạn đang mở file offline (file://) hoặc bị chặn CDN.",
+            );
+            return;
+          }
+
+          // chờ render xong (nhất là khi app.js đang đổ dữ liệu)
+          await new Promise((r) => setTimeout(r, 400));
+
+          // chờ ảnh load
+          const imgs = Array.from(document.querySelectorAll(".cv img"));
+          await Promise.all(
+            imgs.map(
+              (img) =>
+                new Promise((resolve) => {
+                  if (img.complete) return resolve();
+                  img.onload = img.onerror = () => resolve();
+                }),
+            ),
+          );
+
+          const element = document.querySelector(".cv");
+          if (!element) {
+            alert("Không tìm thấy .cv để xuất PDF");
+            return;
+          }
+
+          const opt = {
+            margin: 8,
+            filename: "CV-Huynh-Thi-Kim-Han.pdf",
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: {
+              scale: 2,
+              useCORS: true,
+              allowTaint: true,
+              backgroundColor: "#f3f7f9",
+            },
+            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+          };
+
+          await html2pdf().set(opt).from(element).save();
+        } catch (e) {
+          console.error(e);
+          alert("Xuất PDF lỗi. Mở Console (F12) xem lỗi chi tiết.");
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - CV</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .panel {
+        width: 100%;
+        max-width: 820px;
+        background: #fff;
+        border: 2px solid #d6dde2;
+        border-radius: 12px;
+        padding: 14px;
+      }
+      .panel h2 {
+        margin: 0 0 10px;
+      }
+      .row2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      label {
+        font-weight: 700;
+        font-size: 12px;
+      }
+      input,
+      textarea,
+      button {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 13px;
+        padding: 10px;
+        border: 1px solid #cfd8de;
+        border-radius: 10px;
+        outline: none;
+      }
+      textarea {
+        min-height: 360px;
+        resize: vertical;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      button {
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .hint {
+        font-size: 12px;
+        color: #444;
+        margin-top: 6px;
+      }
+      .hide {
+        display: none;
+      }
+      @media (max-width: 600px) {
+        .row2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="page">
+      <div class="panel">
+        <h2>⚙️ Cấu hình CV</h2>
+
+        <!-- LOGIN -->
+        <div id="loginBox">
+          <div class="row2">
+            <div class="field">
+              <label>Tài khoản</label>
+              <input id="user" placeholder="admin" autocomplete="username" />
+            </div>
+            <div class="field">
+              <label>Mật khẩu</label>
+              <input
+                id="pass"
+                type="password"
+                placeholder="123"
+                autocomplete="current-password"
+              />
+            </div>
+          </div>
+          <div class="actions">
+            <button id="btnLogin">Đăng nhập</button>
+            <a href="index.html" style="align-self: center">← Quay lại CV</a>
+          </div>
+          <div class="hint">Tài khoản mặc định: <b>admin</b> / <b>123</b></div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div id="settingsBox" class="hide">
+          <div class="field">
+            <label>Upload Avatar</label>
+            <input id="avatarFile" type="file" accept="image/*" />
+            <div class="hint">
+              Ảnh được lưu LocalStorage (không cần server).
+            </div>
+          </div>
+
+          <div class="field" style="margin-top: 10px">
+            <label>Nội dung CV (JSON text)</label>
+            <textarea id="jsonText"></textarea>
+            <div class="hint">
+              Bạn sửa nội dung trực tiếp tại đây → bấm <b>Lưu</b> → quay lại CV
+              sẽ cập nhật.
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="btnSave">💾 Lưu</button>
+            <button id="btnReset">♻️ Reset mặc định</button>
+            <button id="btnExport">⬇️ Export</button>
+            <input id="importFile" type="file" accept="application/json" />
+            <button id="btnImport">⬆️ Import</button>
+            <a href="index.html" style="align-self: center">← Quay lại CV</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="settings.js"></script>
+  </body>
+</html>
