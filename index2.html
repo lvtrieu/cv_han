@@ -217,3 +217,191 @@
     </script>
   </body>
 </html>
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV - Huỳnh Thị Kim Hân</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <main class="page">
+      <div class="cv" id="cvRoot">
+        <!-- HEADER -->
+        <header class="header">
+          <div class="avatar-wrap">
+            <img
+              id="avatarImg"
+              class="avatar"
+              src="avatar.jpg"
+              alt="Ảnh đại diện"
+            />
+          </div>
+
+          <div class="header-info">
+            <h1 id="cvName" class="name">Huỳnh Thị Kim Hân</h1>
+            <p id="cvHeadline" class="headline">
+              Ứng tuyển vị trí nhân viên Telesale, Nhân viên văn phòng
+            </p>
+            <ul id="cvMeta" class="meta"></ul>
+          </div>
+        </header>
+
+        <!-- HỌC VẤN -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">HỌC VẤN</h2>
+            <div class="section-line"></div>
+          </div>
+          <div id="eduRows" class="rows"></div>
+        </section>
+
+        <!-- KINH NGHIỆM -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">KINH NGHIỆM LÀM VIỆC</h2>
+            <div class="section-line"></div>
+          </div>
+          <div id="expRows" class="rows"></div>
+        </section>
+
+        <!-- CHỨNG CHỈ -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">CHỨNG CHỈ</h2>
+            <div class="section-line"></div>
+          </div>
+          <div id="certList" class="plain-list"></div>
+        </section>
+
+        <!-- KỸ NĂNG -->
+        <section class="section">
+          <div class="section-head">
+            <h2 class="section-title">KỸ NĂNG</h2>
+            <div class="section-line"></div>
+          </div>
+          <div id="skillList" class="plain-list"></div>
+        </section>
+      </div>
+
+      <!-- Nhóm nút góc phải -->
+      <div class="cv-actions no-print">
+        <button
+          class="icon-btn"
+          type="button"
+          title="In CV"
+          aria-label="In CV"
+          onclick="printPDF()"
+        >
+          🖨️
+        </button>
+
+        <button
+          class="icon-btn"
+          type="button"
+          title="Tải CV PDF"
+          aria-label="Tải CV PDF"
+          onclick="downloadPDF()"
+        >
+          ⬇️
+        </button>
+      </div>
+    </main>
+
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- app.js nếu bạn đang đổ dữ liệu động -->
+    <script src="app.js"></script>
+    <script>
+      function printPDF() {
+        // đảm bảo font/ảnh kịp render
+        setTimeout(() => window.print(), 50);
+      }
+    </script>
+
+    <script>
+      function waitForLayout() {
+        return new Promise((resolve) =>
+          requestAnimationFrame(() => requestAnimationFrame(resolve)),
+        );
+      }
+
+      function waitForImages(root) {
+        const imgs = Array.from(root.querySelectorAll("img"));
+        return Promise.all(
+          imgs.map(
+            (img) =>
+              new Promise((resolve) => {
+                if (img.complete) return resolve();
+                img.onload = () => resolve();
+                img.onerror = () => resolve();
+              }),
+          ),
+        );
+      }
+    </script>
+    <script>
+      async function downloadPDF() {
+        const btn = document.querySelector(".cv-actions .icon-btn:last-child");
+        const oldText = btn ? btn.textContent : "⬇️";
+
+        try {
+          if (btn) {
+            btn.disabled = true;
+            btn.textContent = "⏳";
+          }
+
+          if (!window.html2pdf) {
+            alert("Thiếu html2pdf");
+            return;
+          }
+
+          // ===== BẬT EXPORT MODE =====
+          document.body.classList.add("export-mode");
+
+          await waitForLayout();
+          if (document.fonts?.ready) await document.fonts.ready;
+
+          const cv = document.querySelector(".cv");
+
+          const opt = {
+            margin: 0,
+            filename: "CV-Huynh-Thi-Kim-Han.pdf",
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: {
+              scale: 2,
+              useCORS: true,
+              backgroundColor: "#fff",
+              scrollX: 0,
+              scrollY: 0,
+              width: 794,
+              windowWidth: 794,
+            },
+            jsPDF: {
+              unit: "mm",
+              format: "a4",
+              orientation: "portrait",
+            },
+          };
+
+          await html2pdf().set(opt).from(cv).save();
+        } catch (e) {
+          console.error(e);
+          alert("Xuất PDF lỗi");
+        } finally {
+          // ===== TẮT EXPORT MODE =====
+          document.body.classList.remove("export-mode");
+
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = oldText;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

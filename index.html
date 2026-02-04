@@ -67,7 +67,7 @@
         </section>
       </div>
 
-      <!-- Nhóm nút góc phải -->
+      <!-- Nút góc phải (KHÔNG nằm trong .cv) -->
       <div class="cv-actions no-print">
         <button
           class="icon-btn"
@@ -81,6 +81,7 @@
 
         <button
           class="icon-btn"
+          id="btnDownload"
           type="button"
           title="Tải CV PDF"
           aria-label="Tải CV PDF"
@@ -94,16 +95,14 @@
     <!-- html2pdf -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <!-- app.js nếu bạn đang đổ dữ liệu động -->
+    <!-- app.js: đổ dữ liệu động của bạn -->
     <script src="app.js"></script>
-    <script>
-      function printPDF() {
-        // đảm bảo font/ảnh kịp render
-        setTimeout(() => window.print(), 50);
-      }
-    </script>
 
     <script>
+      function printPDF() {
+        setTimeout(() => window.print(), 50);
+      }
+
       function waitForLayout() {
         return new Promise((resolve) =>
           requestAnimationFrame(() => requestAnimationFrame(resolve)),
@@ -123,30 +122,31 @@
           ),
         );
       }
-    </script>
-    <script>
+
       async function downloadPDF() {
-        const btn = document.querySelector(".cv-actions .icon-btn:last-child");
+        const btn = document.getElementById("btnDownload");
         const oldText = btn ? btn.textContent : "⬇️";
 
         try {
-          if (btn) {
-            btn.disabled = true;
-            btn.textContent = "⏳";
-          }
-
           if (!window.html2pdf) {
             alert("Thiếu html2pdf");
             return;
           }
 
-          // ===== BẬT EXPORT MODE =====
+          if (btn) {
+            btn.disabled = true;
+            btn.textContent = "⏳";
+          }
+
+          // BẬT EXPORT MODE (ép A4 theo mm + ẩn nút + tắt watermark)
           document.body.classList.add("export-mode");
+
+          const cv = document.querySelector(".cv");
 
           await waitForLayout();
           if (document.fonts?.ready) await document.fonts.ready;
-
-          const cv = document.querySelector(".cv");
+          await waitForImages(cv);
+          await waitForLayout();
 
           const opt = {
             margin: 0,
@@ -158,14 +158,13 @@
               backgroundColor: "#fff",
               scrollX: 0,
               scrollY: 0,
-              width: 794,
-              windowWidth: 794,
             },
             jsPDF: {
               unit: "mm",
               format: "a4",
               orientation: "portrait",
             },
+            pagebreak: { mode: ["css", "legacy"] },
           };
 
           await html2pdf().set(opt).from(cv).save();
@@ -173,9 +172,7 @@
           console.error(e);
           alert("Xuất PDF lỗi");
         } finally {
-          // ===== TẮT EXPORT MODE =====
           document.body.classList.remove("export-mode");
-
           if (btn) {
             btn.disabled = false;
             btn.textContent = oldText;
