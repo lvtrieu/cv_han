@@ -377,3 +377,36 @@ body {
   transform: none !important;
   left: auto !important;
 }
+/* ===== ONLY FOR HTML2CANVAS EXPORT ===== */
+.export-a4 {
+  width: 794px; /* A4 px @96dpi */
+  min-height: 1123px;
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.export-a4 .cv {
+  width: 794px !important; /* ép cố định */
+  max-width: 794px !important;
+  margin: 0 !important;
+}
+
+/* Khi export: tắt clamp để chữ không scale theo viewport */
+.export-a4 .name {
+  font-size: 22px !important;
+}
+.export-a4 .headline {
+  font-size: 14px !important;
+}
+.export-a4 .meta,
+.export-a4 .time,
+.export-a4 .content-title,
+.export-a4 .content-sub,
+.export-a4 .content-role,
+.export-a4 .bullets,
+.export-a4 .plain-item,
+.export-a4 .section-title {
+  font-size: 12px !important;
+}
