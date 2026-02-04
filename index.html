@@ -135,53 +135,18 @@
             btn.textContent = "⏳";
           }
 
-          if (typeof html2pdf === "undefined") {
-            alert("Không load được html2pdf. Kiểm tra mạng/CDN.");
+          if (!window.html2pdf) {
+            alert("Thiếu html2pdf");
             return;
           }
 
+          // ===== BẬT EXPORT MODE =====
+          document.body.classList.add("export-mode");
+
           await waitForLayout();
-          if (document.fonts && document.fonts.ready)
-            await document.fonts.ready;
+          if (document.fonts?.ready) await document.fonts.ready;
 
-          const cvEl = document.querySelector(".cv");
-          if (!cvEl) {
-            alert("Không tìm thấy .cv để xuất PDF");
-            return;
-          }
-
-          // ====== A4 wrapper (giấy) ======
-          const A4_W = 794;
-          const A4_H = 1123;
-
-          const paper = document.createElement("div");
-          paper.className = "export-a4";
-
-          const clone = cvEl.cloneNode(true);
-          clone
-            .querySelectorAll(".no-print")
-            .forEach((el) => (el.style.display = "none"));
-
-          paper.appendChild(clone);
-
-          // wrap thật sự render ở (0,0) nhưng ẩn
-          const wrap = document.createElement("div");
-          wrap.style.position = "fixed";
-          wrap.style.left = "0";
-          wrap.style.top = "0";
-          wrap.style.width = A4_W + "px";
-          wrap.style.height = A4_H + "px";
-          wrap.style.opacity = "0";
-          wrap.style.pointerEvents = "none";
-          wrap.style.zIndex = "-1";
-          wrap.style.overflow = "hidden";
-          wrap.style.background = "#fff";
-
-          wrap.appendChild(paper);
-          document.body.appendChild(wrap);
-
-          await waitForImages(paper);
-          await waitForLayout();
+          const cv = document.querySelector(".cv");
 
           const opt = {
             margin: 0,
@@ -190,28 +155,30 @@
             html2canvas: {
               scale: 2,
               useCORS: true,
-              allowTaint: false,
-              backgroundColor: "#ffffff",
+              backgroundColor: "#fff",
               scrollX: 0,
               scrollY: 0,
-              width: A4_W,
-              height: A4_H,
-              windowWidth: A4_W,
-              windowHeight: A4_H,
+              width: 794,
+              windowWidth: 794,
             },
-            jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+            jsPDF: {
+              unit: "mm",
+              format: "a4",
+              orientation: "portrait",
+            },
           };
 
-          await html2pdf().set(opt).from(paper).save();
-
-          document.body.removeChild(wrap);
+          await html2pdf().set(opt).from(cv).save();
         } catch (e) {
           console.error(e);
-          alert("Xuất PDF lỗi. Mở Console (F12) xem chi tiết.");
+          alert("Xuất PDF lỗi");
         } finally {
+          // ===== TẮT EXPORT MODE =====
+          document.body.classList.remove("export-mode");
+
           if (btn) {
             btn.disabled = false;
-            btn.textContent = oldText || "⬇️";
+            btn.textContent = oldText;
           }
         }
       }

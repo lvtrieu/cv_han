@@ -410,3 +410,14 @@ body {
 .export-a4 .section-title {
   font-size: 12px !important;
 }
+/* ===== FIX EXPORT PDF ===== */
+.export-mode .page {
+  display: block !important;
+  padding: 0 !important;
+}
+
+.export-mode .cv {
+  width: 794px !important; /* A4 */
+  max-width: none !important;
+  margin: 0 !important;
+}
