@@ -372,3 +372,8 @@ body {
     display: none !important;
   }
 }
+
+.cv {
+  transform: none !important;
+  left: auto !important;
+}

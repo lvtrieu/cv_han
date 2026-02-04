@@ -123,8 +123,11 @@
           ),
         );
       }
+    </script>
+    <script>
       async function downloadPDF() {
-        const btn = document.querySelector(".pdf-download-btn");
+        // nút download là nút có icon ⬇️ trong .cv-actions
+        const btn = document.querySelector(".cv-actions .icon-btn:last-child");
         const oldText = btn ? btn.textContent : "⬇️";
 
         try {
@@ -148,34 +151,37 @@
             return;
           }
 
-          // ====== Tạo bản A4 off-screen để render đúng khổ ======
+          // ====== Clone CV ======
           const clone = cvEl.cloneNode(true);
-
-          // ẩn phần không in
           clone
             .querySelectorAll(".no-print")
             .forEach((el) => (el.style.display = "none"));
 
-          // A4 px tại 96dpi: 794 x 1123 (xấp xỉ)
+          // A4 px tại 96dpi
           const A4_W = 794;
           const A4_H = 1123;
 
+          // ====== Wrap KHÔNG đẩy ra ngoài màn hình (tránh crop) ======
           const wrap = document.createElement("div");
           wrap.style.position = "fixed";
-          wrap.style.left = "-100000px";
+          wrap.style.left = "0";
           wrap.style.top = "0";
           wrap.style.width = A4_W + "px";
           wrap.style.background = "#fff";
           wrap.style.padding = "0";
           wrap.style.margin = "0";
+          wrap.style.zIndex = "-1";
+          wrap.style.opacity = "0"; // ẩn nhưng vẫn render được
+          wrap.style.pointerEvents = "none"; // không click trúng
+          wrap.style.overflow = "hidden";
 
-          // ép clone theo A4 để tránh crop
+          // ép clone về đúng width A4
           clone.style.width = A4_W + "px";
           clone.style.maxWidth = "none";
           clone.style.margin = "0";
-          clone.style.boxSizing = "border-box";
           clone.style.transform = "none";
           clone.style.boxShadow = "none";
+          clone.style.overflow = "hidden";
 
           wrap.appendChild(clone);
           document.body.appendChild(wrap);
@@ -192,12 +198,13 @@
               useCORS: true,
               allowTaint: false,
               backgroundColor: "#ffffff",
+              scrollX: 0,
               scrollY: 0,
-              width: A4_W,
               windowWidth: A4_W,
+              windowHeight: A4_H,
+              width: A4_W,
             },
             jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-            pagebreak: { mode: ["css", "legacy"] },
           };
 
           await html2pdf().set(opt).from(clone).save();
