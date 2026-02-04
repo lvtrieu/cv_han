@@ -123,6 +123,7 @@
           ),
         );
       }
+
       async function downloadPDF() {
         const btn = document.querySelector(".pdf-download-btn");
         const oldText = btn ? btn.textContent : "⬇️";
@@ -138,6 +139,16 @@
             return;
           }
 
+          // Nếu mở bằng file:// thì browser chặn ảnh/canvas -> PDF có thể mất avatar
+          // (Lên git/host http(s) sẽ OK)
+          if (location.protocol === "file:") {
+            alert(
+              "Bạn đang mở bằng file:// nên trình duyệt có thể chặn ảnh khi xuất PDF. " +
+                "Hãy dùng Live Server hoặc đưa lên GitHub Pages để xuất PDF đầy đủ.",
+            );
+            return;
+          }
+
           await waitForLayout();
           if (document.fonts && document.fonts.ready)
             await document.fonts.ready;
@@ -148,7 +159,7 @@
             return;
           }
 
-          // ====== Tạo bản A4 off-screen để render đúng khổ ======
+          // clone để export
           const clone = cvEl.cloneNode(true);
 
           // ẩn phần không in
@@ -156,27 +167,19 @@
             .querySelectorAll(".no-print")
             .forEach((el) => (el.style.display = "none"));
 
-          // A4 px tại 96dpi: 794 x 1123 (xấp xỉ)
-          const A4_W = 794;
-          const A4_H = 1123;
+          // reset những thứ hay làm html2canvas tính sai
+          clone.style.margin = "0";
+          clone.style.transform = "none";
+          clone.style.boxShadow = "none";
 
+          // container off-screen
           const wrap = document.createElement("div");
           wrap.style.position = "fixed";
           wrap.style.left = "-100000px";
           wrap.style.top = "0";
-          wrap.style.width = A4_W + "px";
           wrap.style.background = "#fff";
           wrap.style.padding = "0";
           wrap.style.margin = "0";
-
-          // ép clone theo A4 để tránh crop
-          clone.style.width = A4_W + "px";
-          clone.style.maxWidth = "none";
-          clone.style.margin = "0";
-          clone.style.boxSizing = "border-box";
-          clone.style.transform = "none";
-          clone.style.boxShadow = "none";
-
           wrap.appendChild(clone);
           document.body.appendChild(wrap);
 
@@ -193,11 +196,9 @@
               allowTaint: false,
               backgroundColor: "#ffffff",
               scrollY: 0,
-              width: A4_W,
-              windowWidth: A4_W,
+              windowWidth: clone.scrollWidth,
             },
             jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-            pagebreak: { mode: ["css", "legacy"] },
           };
 
           await html2pdf().set(opt).from(clone).save();
